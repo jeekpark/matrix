@@ -1,7 +1,9 @@
 #pragma once
 
+#include <initializer_list>
 #include <iostream>
 #include <cstdint>
+#include <cstring>
 
 typedef int8_t      i8;
 typedef int16_t     i16;
@@ -21,10 +23,15 @@ namespace tk3
     {
         K data[N];
 
-        u64 Size()
-        {
-            return N;
-        }
+        Vector();
+        Vector(const Vector&);
+        const Vector& operator=(const Vector&);
+        Vector(std::initializer_list<K>);
+        ~Vector();
+
+        K& operator[](u64);
+        K operator[](u64) const;
+
 
         void Add(const Vector& rhs)
         {
@@ -60,4 +67,57 @@ namespace tk3
             std::cout << data[N - 1] << " )" << std::endl;
         }
     };
+}
+
+// Impl
+namespace tk3
+{
+    template <class K, u64 N>
+    Vector<K, N>::Vector()
+    {
+        std::memset(&data, 0, sizeof(data));
+    }
+
+    template <class K, u64 N>
+    Vector<K, N>::Vector(const Vector& copy)
+        : data(copy.data)
+    {}
+
+    template <class K, u64 N>
+    const Vector<K, N>& Vector<K, N>::operator=(const Vector& copy)
+    {
+        if (&copy != this)
+        {
+            data = copy.data;
+        }
+        return this;
+    }
+
+    template <class K, u64 N>
+    Vector<K, N>::Vector(std::initializer_list<K> init)
+    {
+        u64 i = 0;
+        for (auto it = init.begin(); it != init.end() && i < N; ++it, ++i)
+        {
+            data[i] = *it;
+        }
+    }
+
+    template <class K, u64 N>
+    Vector<K, N>::~Vector()
+    {}
+
+    template <class K, u64 N>
+    K& Vector<K, N>::operator[](u64 index)
+    {
+        return data[index];
+    }
+
+    template <class K, u64 N>
+    K Vector<K, N>::operator[](u64 index) const
+    {
+        return data[index];
+    }
+
+
 }

@@ -18,5 +18,7 @@ int main()
     A.Scl(10);
     A.PrintLog();
 
+    std::cout << A[2] << std::endl;
+
     return 0;
 }

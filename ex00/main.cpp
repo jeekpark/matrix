@@ -22,6 +22,10 @@ int main()
     std::cout << "A[1]: " << A[1] << std::endl;
     std::cout << "A[2]: " << A[2] << std::endl;
     
+    tk3::Vector<T, 3> C = (A + B);
+    C.PrintLog();
 
+    C = A - B;
+    C.PrintLog();
     return 0;
 }

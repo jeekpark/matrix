@@ -40,7 +40,16 @@ namespace tk3
         void Sub(const Vector&);
         void Scl(const K&);
 
+        
+
     };
+
+    // API ex00
+    template <class K, u64 N>
+    Vector<K, N> operator+(const Vector<K, N>&, const Vector<K, N>&);
+    template <class K, u64 N>
+    Vector<K, N> operator-(const Vector<K, N>&, const Vector<K, N>&);
+
 } // namespace tk3
 
 // Impl general
@@ -54,17 +63,18 @@ namespace tk3
 
     template <class K, u64 N>
     Vector<K, N>::Vector(const Vector& copy)
-        : data(copy.data)
-    {}
+    {
+        std::memcpy(data, copy.data, sizeof(data));
+    }
 
     template <class K, u64 N>
     const Vector<K, N>& Vector<K, N>::operator=(const Vector& copy)
     {
         if (&copy != this)
         {
-            data = copy.data;
+            std::memcpy(data, copy.data, sizeof(data));
         }
-        return this;
+        return *this;
     }
 
     template <class K, u64 N>
@@ -134,5 +144,27 @@ namespace tk3
         {
             data[i] *= scalar;
         }
+    }
+
+    template<class K, u64 N>
+    Vector<K, N> operator+(const Vector<K, N>& left, const Vector<K, N>& right)
+    {
+        Vector<K, N> res(left);
+        for (u64 i = 0; i < N; ++i)
+        {
+            res.data[i] += right.data[i];
+        }
+        return res;
+    }
+
+    template<class K, u64 N>
+    Vector<K, N> operator-(const Vector<K, N>& left, const Vector<K, N>& right)
+    {
+        Vector<K, N> res(left);
+        for (u64 i = 0; i < N; ++i)
+        {
+            res.data[i] -= right.data[i];
+        }
+        return res;
     }
 } // namespace tk3 | Impl ex00

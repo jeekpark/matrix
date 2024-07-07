@@ -18,7 +18,10 @@ int main()
     A.Scl(10);
     A.PrintLog();
 
-    std::cout << A[2] << std::endl;
+    std::cout << "A[0]: " << A[0] << std::endl;
+    std::cout << "A[1]: " << A[1] << std::endl;
+    std::cout << "A[2]: " << A[2] << std::endl;
+    
 
     return 0;
 }

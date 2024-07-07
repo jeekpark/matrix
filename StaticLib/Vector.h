@@ -16,6 +16,7 @@ typedef uint64_t    u64;
 typedef float       f32;
 typedef double      f64;
 
+// API
 namespace tk3
 {
     template <class K, u64 N>
@@ -23,6 +24,7 @@ namespace tk3
     {
         K data[N];
 
+        // API general
         Vector();
         Vector(const Vector&);
         const Vector& operator=(const Vector&);
@@ -31,45 +33,17 @@ namespace tk3
 
         K& operator[](u64);
         K operator[](u64) const;
+        void PrintLog() const;
 
+        // API ex00
+        void Add(const Vector&);
+        void Sub(const Vector&);
+        void Scl(const K&);
 
-        void Add(const Vector& rhs)
-        {
-            for (u64 i = 0; i < N; ++i)
-            {
-                data[i] += rhs.data[i];
-            }
-        }
-
-        void Sub(const Vector& rhs)
-        {
-            for (u64 i = 0; i < N; ++i)
-            {
-                data[i] -= rhs.data[i];
-            }
-        }
-
-        void Scl(const K& scalar)
-        {
-            for (u64 i = 0; i < N; ++i)
-            {
-                data[i] *= scalar;
-            }
-        }
-
-        void PrintLog()
-        {
-            std::cout << N << "D Vector ( ";
-            for (u64 i = 0; i < N - 1; ++i)
-            {
-                std::cout << data[i] << ", ";
-            }
-            std::cout << data[N - 1] << " )" << std::endl;
-        }
     };
-}
+} // namespace tk3
 
-// Impl
+// Impl general
 namespace tk3
 {
     template <class K, u64 N>
@@ -96,6 +70,7 @@ namespace tk3
     template <class K, u64 N>
     Vector<K, N>::Vector(std::initializer_list<K> init)
     {
+        std::memset(&data, 0, sizeof(data));
         u64 i = 0;
         for (auto it = init.begin(); it != init.end() && i < N; ++it, ++i)
         {
@@ -119,5 +94,45 @@ namespace tk3
         return data[index];
     }
 
+    template <class K, u64 N>
+    void Vector<K, N>::PrintLog() const
+    {
+        std::cout << N << "D Vector ( ";
+        for (u64 i = 0; i < N - 1; ++i)
+        {
+            std::cout << data[i] << ", ";
+        }
+        std::cout << data[N - 1] << " )" << std::endl;
+    }
+} // namespace tk3 | Impl general
 
-}
+// Impl ex00
+namespace tk3
+{
+    template <class K, u64 N>
+    void Vector<K, N>::Add(const Vector& rhs)
+    {
+        for (u64 i = 0; i < N; ++i)
+        {
+            data[i] += rhs.data[i];
+        }
+    }
+
+    template <class K, u64 N>
+    void Vector<K, N>::Sub(const Vector& rhs)
+    {
+        for (u64 i = 0; i < N; ++i)
+        {
+            data[i] -= rhs.data[i];
+        }
+    }
+
+    template <class K, u64 N>
+    void Vector<K, N>::Scl(const K& scalar)
+    {
+        for (u64 i = 0; i < N; ++i)
+        {
+            data[i] *= scalar;
+        }
+    }
+} // namespace tk3 | Impl ex00

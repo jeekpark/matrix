@@ -27,5 +27,8 @@ int main()
 
     C = A - B;
     C.PrintLog();
+
+    C = A * 50.f;
+    C.PrintLog();
     return 0;
 }

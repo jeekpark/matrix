@@ -49,6 +49,10 @@ namespace tk3
     Vector<K, N> operator+(const Vector<K, N>&, const Vector<K, N>&);
     template <class K, u64 N>
     Vector<K, N> operator-(const Vector<K, N>&, const Vector<K, N>&);
+    template <class K, u64 N>
+    Vector<K, N> operator*(const Vector<K, N>&, const K&);
+    template <class K, u64 N>
+    Vector<K, N> operator*(const K&, const Vector<K, N>&);
 
 } // namespace tk3
 
@@ -167,4 +171,27 @@ namespace tk3
         }
         return res;
     }
+
+    template<class K, u64 N>
+    Vector<K, N> operator*(const Vector<K, N>& left, const K& scalar)
+    {
+        Vector<K, N> res(left);
+        for (u64 i = 0; i < N; ++i)
+        {
+            res.data[i] *= scalar;
+        }
+        return res;
+    }
+
+    template<class K, u64 N>
+    Vector<K, N> operator*(const K& scalar, const Vector<K, N>& right)
+    {
+        Vector<K, N> res(right);
+        for (u64 i = 0; i < N; ++i)
+        {
+            res.data[i] *= scalar;
+        }
+        return res;
+    }
+
 } // namespace tk3 | Impl ex00

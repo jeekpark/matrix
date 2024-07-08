@@ -16,7 +16,7 @@ typedef uint64_t    u64;
 typedef float       f32;
 typedef double      f64;
 
-// API
+// Public API
 namespace tk3
 {
     template <class K, u64 N>
@@ -25,7 +25,7 @@ namespace tk3
         K data[N];
 
         // API general
-        Vector();
+        Vector();  
         Vector(const Vector&);
         const Vector& operator=(const Vector&);
         Vector(std::initializer_list<K>);
@@ -33,15 +33,12 @@ namespace tk3
 
         K& operator[](u64);
         K operator[](u64) const;
-        void PrintLog() const;
+        void Print() const;
 
         // API ex00
         void Add(const Vector&);
         void Sub(const Vector&);
         void Scl(const K&);
-
-        
-
     };
 
     // API ex00
@@ -54,7 +51,7 @@ namespace tk3
     template <class K, u64 N>
     Vector<K, N> operator*(const K&, const Vector<K, N>&);
 
-} // namespace tk3
+} // namespace tk3 | Public API
 
 // Impl general
 namespace tk3
@@ -84,12 +81,7 @@ namespace tk3
     template <class K, u64 N>
     Vector<K, N>::Vector(std::initializer_list<K> init)
     {
-        std::memset(&data, 0, sizeof(data));
-        u64 i = 0;
-        for (auto it = init.begin(); it != init.end() && i < N; ++it, ++i)
-        {
-            data[i] = *it;
-        }
+        std::copy(init.begin(), init.end(), data);
     }
 
     template <class K, u64 N>
@@ -109,7 +101,7 @@ namespace tk3
     }
 
     template <class K, u64 N>
-    void Vector<K, N>::PrintLog() const
+    void Vector<K, N>::Print() const
     {
         std::cout << N << "D Vector ( ";
         for (u64 i = 0; i < N - 1; ++i)

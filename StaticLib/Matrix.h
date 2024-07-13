@@ -2,19 +2,10 @@
 
 #include <initializer_list>
 #include <iostream>
-#include <cstdint>
+#include <iomanip>
 #include <cstring>
 
-typedef int8_t      i8;
-typedef int16_t     i16;
-typedef int32_t     i32;
-typedef int64_t     i64;
-typedef uint8_t     u8;
-typedef uint16_t    u16;
-typedef uint32_t    u32;
-typedef uint64_t    u64;
-typedef float       f32;
-typedef double      f64;
+#include "types.h"
 
 // Public API
 namespace tk3
@@ -25,26 +16,14 @@ namespace tk3
         K data[N * M];
 
         // API general
-        Matrix();
-        Matrix(const Matrix&);
-        const Matrix& operator=(const Matrix&);
-        Matrix(std::initializer_list<K>);
-        ~Matrix();
-
-        struct RowProxy
-        {
-            K* row;
-            K& operator[](u64);
-            const K& operator[](u64) const;
-        };
-        RowProxy operator[](u64);
-        const RowProxy operator[](u64) const;
-        void Print() const;
+        K* operator[](u64);
+        const K* operator[](u64) const;
+        void ConsolePrint() const;
 
         // API ex00
         void Add(const Matrix&);
         void Sub(const Matrix&);
-        void Scl(const Matrix&);
+        void Scl(const K&);
     };
 
     // API ex00
@@ -63,36 +42,70 @@ namespace tk3
 namespace tk3
 {
     template<class K, u64 N, u64 M>
-    Matrix<K, N, M>::Matrix()
+    K* Matrix<K, N, M>::operator[](u64 row)
     {
-        std::memset(&data, 0, sizeof(data));
+        return &data[M * row];
     }
 
     template<class K, u64 N, u64 M>
-    Matrix<K, N, M>::Matrix(const Matrix& copy)
+    const K* Matrix<K, N, M>::operator[](u64 row) const
     {
-        std::memcpy(data, copy.data, sizeof(data));
+        return &data[M * row];
     }
 
     template<class K, u64 N, u64 M>
-    const Matrix<K, N, M>& Matrix<K, N, M>::operator=(const Matrix& copy)
+    void Matrix<K, N, M>::ConsolePrint() const
     {
-        if (&copy != this)
+        for (u64 n = 0; n < N; ++n)
         {
-            std::memcpy(data, copy.data, sizeof(data));
+            for (u64 m = 0; m < M; ++m)
+            {
+                std::cout
+                    << "["
+                    << std::setw(5)
+                    << (*this)[n][m]
+                    << "]";
+            }
+            std::cout << std::endl;
         }
-        return *this;
     }
-
-    template<class K, u64 N, u64 M>
-    Matrix<K, N, M>::Matrix(std::initializer_list<K> init)
-    {
-        std::copy(init.begin(), init.end(), data);
-    }
-
-    template<class K, u64 N, u64 M>
-    Matrix<K, N, M>::~Matrix()
-    {}
-
-
 } // namespace tk3 | Impl general
+
+namespace tk3
+{
+    template<class K, u64 N, u64 M>
+    void Matrix<K, N, M>::Add(const Matrix& rhs)
+    {
+        for (u64 n = 0; n < N; ++n)
+        {
+            for (u64 m = 0; m < M; ++m)
+            {
+                (*this)[n][m] += rhs[n][m];
+            }
+        }
+    }
+
+    template<class K, u64 N, u64 M>
+    void Matrix<K, N, M>::Sub(const Matrix& rhs)
+    {
+        for (u64 n = 0; n < N; ++n)
+        {
+            for (u64 m = 0; m < M; ++m)
+            {
+                (*this)[n][m] -= rhs[n][m];
+            }
+        }
+    }
+
+    template<class K, u64 N, u64 M>
+    void Matrix<K, N, M>::Scl(const K& scalar)
+    {
+        for (u64 n = 0; n < N; ++n)
+        {
+            for (u64 m = 0; m < M; ++m)
+            {
+                (*this)[n][m] *= scalar;
+            }
+        }
+    }
+} // namespace tk3 | Impl ex00

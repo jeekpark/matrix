@@ -2,19 +2,10 @@
 
 #include <initializer_list>
 #include <iostream>
-#include <cstdint>
+#include <iomanip>
 #include <cstring>
 
-typedef int8_t      i8;
-typedef int16_t     i16;
-typedef int32_t     i32;
-typedef int64_t     i64;
-typedef uint8_t     u8;
-typedef uint16_t    u16;
-typedef uint32_t    u32;
-typedef uint64_t    u64;
-typedef float       f32;
-typedef double      f64;
+#include "types.h"
 
 // Public API
 namespace tk3
@@ -25,15 +16,9 @@ namespace tk3
         K data[N];
 
         // API general
-        Vector();  
-        Vector(const Vector&);
-        const Vector& operator=(const Vector&);
-        Vector(std::initializer_list<K>);
-        ~Vector();
-
         K& operator[](u64);
         K operator[](u64) const;
-        void Print() const;
+        void PrintLayout() const;
 
         // API ex00
         void Add(const Vector&);
@@ -57,38 +42,6 @@ namespace tk3
 namespace tk3
 {
     template <class K, u64 N>
-    Vector<K, N>::Vector()
-    {
-        std::memset(&data, 0, sizeof(data));
-    }
-
-    template <class K, u64 N>
-    Vector<K, N>::Vector(const Vector& copy)
-    {
-        std::memcpy(data, copy.data, sizeof(data));
-    }
-
-    template <class K, u64 N>
-    const Vector<K, N>& Vector<K, N>::operator=(const Vector& copy)
-    {
-        if (&copy != this)
-        {
-            std::memcpy(data, copy.data, sizeof(data));
-        }
-        return *this;
-    }
-
-    template <class K, u64 N>
-    Vector<K, N>::Vector(std::initializer_list<K> init)
-    {
-        std::copy(init.begin(), init.end(), data);
-    }
-
-    template <class K, u64 N>
-    Vector<K, N>::~Vector()
-    {}
-
-    template <class K, u64 N>
     K& Vector<K, N>::operator[](u64 index)
     {
         return data[index];
@@ -101,14 +54,20 @@ namespace tk3
     }
 
     template <class K, u64 N>
-    void Vector<K, N>::Print() const
+    void Vector<K, N>::PrintLayout() const
     {
-        std::cout << N << "D Vector ( ";
-        for (u64 i = 0; i < N - 1; ++i)
+        for (u64 n = 0; n < N; ++n)
         {
-            std::cout << data[i] << ", ";
+
+            std::cout
+                << "["
+                << std::setw(5)
+                << (*this)[n]
+                << "]";
+            
+            
         }
-        std::cout << data[N - 1] << " )" << std::endl;
+        std::cout << std::endl;
     }
 } // namespace tk3 | Impl general
 

@@ -143,6 +143,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="types.h" />
     <ClInclude Include="Vector.h" />
   </ItemGroup>
   <ItemGroup>

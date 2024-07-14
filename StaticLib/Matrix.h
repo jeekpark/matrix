@@ -77,36 +77,27 @@ namespace tk3
     template<class K, u64 N, u64 M>
     void Matrix<K, N, M>::Add(const Matrix& rhs)
     {
-        for (u64 n = 0; n < N; ++n)
+        for (u64 i = 0; i < N * M; ++i)
         {
-            for (u64 m = 0; m < M; ++m)
-            {
-                (*this)[n][m] += rhs[n][m];
-            }
+            data[i] += rhs.data[i];
         }
     }
 
     template<class K, u64 N, u64 M>
     void Matrix<K, N, M>::Sub(const Matrix& rhs)
     {
-        for (u64 n = 0; n < N; ++n)
+        for (u64 i = 0; i < N * M; ++i)
         {
-            for (u64 m = 0; m < M; ++m)
-            {
-                (*this)[n][m] -= rhs[n][m];
-            }
+            data[i] -= rhs.data[i];
         }
     }
 
     template<class K, u64 N, u64 M>
     void Matrix<K, N, M>::Scl(const K& scalar)
     {
-        for (u64 n = 0; n < N; ++n)
+        for (u64 i = 0; i < N * M; ++i)
         {
-            for (u64 m = 0; m < M; ++m)
-            {
-                (*this)[n][m] *= scalar;
-            }
+            data[i] *= scalar;
         }
     }
 

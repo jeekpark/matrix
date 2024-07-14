@@ -1,10 +1,5 @@
 #pragma once
 
-#include <initializer_list>
-#include <iostream>
-#include <iomanip>
-#include <cstring>
-
 #include "types.h"
 
 // Public API
@@ -18,7 +13,6 @@ namespace tk3
         // API general
         K& operator()(u64, u64);
         const K& operator()(u64, u64) const;
-        void PrintLayout() const;
 
         // API ex00
         void Add(const Matrix&);
@@ -51,23 +45,6 @@ namespace tk3
     const K& Matrix<K, N, M>::operator()(u64 row, u64 col) const
     {
         return data[row * N + col];
-    }
-
-    template<class K, u64 N, u64 M>
-    void Matrix<K, N, M>::PrintLayout() const
-    {
-        for (u64 n = 0; n < N; ++n)
-        {
-            for (u64 m = 0; m < M; ++m)
-            {
-                std::cout
-                    << "["
-                    << std::setw(5)
-                    << data[n * M + m]
-                    << "]";
-            }
-            std::cout << std::endl;
-        }
     }
 } // namespace tk3 | Impl general
 

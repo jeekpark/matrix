@@ -1,5 +1,6 @@
 #include "Vector.h"
 #include "Matrix.h"
+#include "utils.h"
 #include <type_traits>
 
 using T = tk3::f32;
@@ -27,10 +28,10 @@ int main()
         std::cout << "Vector<" << TTYPE << ", 3> A = { 1.f, 2.f, 3.f };\n";
         std::cout << "Vector<" << TTYPE << ", 3> B = { .5f, .5f, .5f };\n\n";
         std::cout << "A Layout: \n";
-        A.PrintLayout();
+        printLayout(A);
         std::cout << '\n';
         std::cout << "B Layout: \n";
-        B.PrintLayout();
+        printLayout(B);
         std::cout << "--------------------------\n";
         std::cout << "\n\n\n";
 
@@ -40,10 +41,10 @@ int main()
         std::cout << "A.Add(B);\n\n";
         A.Add(B);
         std::cout << "A Layout: \n";
-        A.PrintLayout();
+        printLayout(A);
         std::cout << '\n';
         std::cout << "B Layout: \n";
-        B.PrintLayout();
+        printLayout(B);
         std::cout << "--------------------------\n";
         std::cout << "\n\n\n";
 
@@ -53,10 +54,10 @@ int main()
         std::cout << "A.Sub(B);\n\n";
         A.Sub(B);
         std::cout << "A Layout: \n";
-        A.PrintLayout();
+        printLayout(A);
         std::cout << '\n';
         std::cout << "B Layout: \n";
-        B.PrintLayout();
+        printLayout(B);
         std::cout << "--------------------------\n";
         std::cout << "\n\n\n";
 
@@ -67,7 +68,7 @@ int main()
         std::cout << "A.Scl(3.14f);\n\n";
         A.Scl(3.14f);
         std::cout << "A Layout: \n";
-        A.PrintLayout();
+        printLayout(A);
         std::cout << "--------------------------\n";
         std::cout << "\n\n\n";
 
@@ -77,13 +78,13 @@ int main()
         tk3::Vector<T, 3> C = A + B;
         std::cout << "C = A + B;\n\n";
         std::cout << "C Layout: \n";
-        C.PrintLayout();
+        printLayout(C);
         std::cout << '\n';
         std::cout << "A Layout: \n";
-        A.PrintLayout();
+        printLayout(A);
         std::cout << '\n';
         std::cout << "B Layout: \n";
-        B.PrintLayout();
+        printLayout(B);
         std::cout << "--------------------------\n";
         std::cout << "\n\n\n";
 
@@ -93,13 +94,13 @@ int main()
         C = A - B;
         std::cout << "C = A - B;\n\n";
         std::cout << "C Layout: \n";
-        C.PrintLayout();
+        printLayout(C);
         std::cout << '\n';
         std::cout << "A Layout: \n";
-        A.PrintLayout();
+        printLayout(A);
         std::cout << '\n';
         std::cout << "B Layout: \n";
-        B.PrintLayout();
+        printLayout(B);
         std::cout << "--------------------------\n";
         std::cout << "\n\n\n";
 
@@ -109,13 +110,13 @@ int main()
         C = A * 100.f;
         std::cout << "C = A * 100.f;\n\n";
         std::cout << "C Layout: \n";
-        C.PrintLayout();
+        printLayout(C);
         std::cout << '\n';
         std::cout << "A Layout: \n";
-        A.PrintLayout();
+        printLayout(A);
         std::cout << '\n';
         std::cout << "B Layout: \n";
-        B.PrintLayout();
+        printLayout(B);
         std::cout << "--------------------------\n";
         std::cout << "\n\n\n";
 
@@ -125,13 +126,13 @@ int main()
         C = 100.f * A;
         std::cout << "C = 100.f * A;\n\n";
         std::cout << "C Layout: \n";
-        C.PrintLayout();
+        printLayout(C);
         std::cout << '\n';
         std::cout << "A Layout: \n";
-        A.PrintLayout();
+        printLayout(A);
         std::cout << '\n';
         std::cout << "B Layout: \n";
-        B.PrintLayout();
+        printLayout(B);
         std::cout << "--------------------------\n";
     }
     std::cout << "\n||||| Test for Vector End |||||\n\n\n" << std::endl;
@@ -171,10 +172,10 @@ int main()
             << "    .5f, .5f, .5f\n"
             << "};\n";
         std::cout << "A Layout: \n";
-        A.PrintLayout();
+        printLayout(A);
         std::cout << '\n';
         std::cout << "B Layout: \n";
-        B.PrintLayout();
+        printLayout(B);
         std::cout << "--------------------------\n";
         std::cout << "\n\n\n";
 
@@ -184,10 +185,10 @@ int main()
         std::cout << "A.Add(B);\n\n";
         A.Add(B);
         std::cout << "A Layout: \n";
-        A.PrintLayout();
+        printLayout(A);
         std::cout << '\n';
         std::cout << "B Layout: \n";
-        B.PrintLayout();
+        printLayout(B);
         std::cout << "--------------------------\n";
         std::cout << "\n\n\n";
 
@@ -197,10 +198,10 @@ int main()
         std::cout << "A.Sub(B);\n\n";
         A.Sub(B);
         std::cout << "A Layout: \n";
-        A.PrintLayout();
+        printLayout(A);
         std::cout << '\n';
         std::cout << "B Layout: \n";
-        B.PrintLayout();
+        printLayout(B);
         std::cout << "--------------------------\n";
         std::cout << "\n\n\n";
 
@@ -211,7 +212,7 @@ int main()
         std::cout << "A.Scl(3.14f);\n\n";
         A.Scl(3.14f);
         std::cout << "A Layout: \n";
-        A.PrintLayout();
+        printLayout(A);
         std::cout << "--------------------------\n";
         std::cout << "\n\n\n";
 
@@ -221,13 +222,13 @@ int main()
         tk3::Matrix<T, 3, 3> C = A + B;
         std::cout << "C = A + B;\n\n";
         std::cout << "C Layout: \n";
-        C.PrintLayout();
+        printLayout(C);
         std::cout << '\n';
         std::cout << "A Layout: \n";
-        A.PrintLayout();
+        printLayout(A);
         std::cout << '\n';
         std::cout << "B Layout: \n";
-        B.PrintLayout();
+        printLayout(B);
         std::cout << "--------------------------\n";
         std::cout << "\n\n\n";
 
@@ -237,13 +238,13 @@ int main()
         C = A - B;
         std::cout << "C = A - B;\n\n";
         std::cout << "C Layout: \n";
-        C.PrintLayout();
+        printLayout(C);
         std::cout << '\n';
         std::cout << "A Layout: \n";
-        A.PrintLayout();
+        printLayout(A);
         std::cout << '\n';
         std::cout << "B Layout: \n";
-        B.PrintLayout();
+        printLayout(B);
         std::cout << "--------------------------\n";
         std::cout << "\n\n\n";
 
@@ -253,13 +254,13 @@ int main()
         C = A * 100.f;
         std::cout << "C = A * 100.f;\n\n";
         std::cout << "C Layout: \n";
-        C.PrintLayout();
+        printLayout(C);
         std::cout << '\n';
         std::cout << "A Layout: \n";
-        A.PrintLayout();
+        printLayout(A);
         std::cout << '\n';
         std::cout << "B Layout: \n";
-        B.PrintLayout();
+        printLayout(B);
         std::cout << "--------------------------\n";
         std::cout << "\n\n\n";
 
@@ -269,13 +270,13 @@ int main()
         C = 100.f * A;
         std::cout << "C = 100.f * A;\n\n";
         std::cout << "C Layout: \n";
-        C.PrintLayout();
+        printLayout(C);
         std::cout << '\n';
         std::cout << "A Layout: \n";
-        A.PrintLayout();
+        printLayout(A);
         std::cout << '\n';
         std::cout << "B Layout: \n";
-        B.PrintLayout();
+        printLayout(B);
         std::cout << "--------------------------\n";
         std::cout << "\n";
     }

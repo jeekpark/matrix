@@ -17,7 +17,7 @@ namespace tk3
 
         // API general
         K& operator[](u64);
-        K operator[](u64) const;
+        const K& operator[](u64) const;
         void PrintLayout() const;
 
         // API ex00
@@ -48,7 +48,7 @@ namespace tk3
     }
 
     template <class K, u64 N>
-    K Vector<K, N>::operator[](u64 index) const
+    const K& Vector<K, N>::operator[](u64 index) const
     {
         return data[index];
     }
@@ -58,14 +58,12 @@ namespace tk3
     {
         for (u64 n = 0; n < N; ++n)
         {
-
             std::cout
                 << "["
                 << std::setw(5)
                 << (*this)[n]
                 << "]";
-            
-            
+
         }
         std::cout << std::endl;
     }

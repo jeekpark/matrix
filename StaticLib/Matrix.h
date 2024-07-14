@@ -16,8 +16,8 @@ namespace tk3
         K data[N * M];
 
         // API general
-        K* operator[](u64);
-        const K* operator[](u64) const;
+        K& operator()(u64, u64);
+        const K& operator()(u64, u64) const;
         void PrintLayout() const;
 
         // API ex00
@@ -42,15 +42,15 @@ namespace tk3
 namespace tk3
 {
     template<class K, u64 N, u64 M>
-    K* Matrix<K, N, M>::operator[](u64 row)
+    K& Matrix<K, N, M>::operator()(u64 row, u64 col)
     {
-        return &data[M * row];
+        return data[row * N + col];
     }
 
     template<class K, u64 N, u64 M>
-    const K* Matrix<K, N, M>::operator[](u64 row) const
+    const K& Matrix<K, N, M>::operator()(u64 row, u64 col) const
     {
-        return &data[M * row];
+        return data[row * N + col];
     }
 
     template<class K, u64 N, u64 M>
@@ -63,7 +63,7 @@ namespace tk3
                 std::cout
                     << "["
                     << std::setw(5)
-                    << (*this)[n][m]
+                    << data[n * M + m]
                     << "]";
             }
             std::cout << std::endl;

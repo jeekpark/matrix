@@ -18,7 +18,7 @@ namespace tk3
         // API general
         K* operator[](u64);
         const K* operator[](u64) const;
-        void ConsolePrint() const;
+        void PrintLayout() const;
 
         // API ex00
         void Add(const Matrix&);
@@ -54,7 +54,7 @@ namespace tk3
     }
 
     template<class K, u64 N, u64 M>
-    void Matrix<K, N, M>::ConsolePrint() const
+    void Matrix<K, N, M>::PrintLayout() const
     {
         for (u64 n = 0; n < N; ++n)
         {
@@ -71,6 +71,7 @@ namespace tk3
     }
 } // namespace tk3 | Impl general
 
+// Impl ex00
 namespace tk3
 {
     template<class K, u64 N, u64 M>
@@ -107,5 +108,37 @@ namespace tk3
                 (*this)[n][m] *= scalar;
             }
         }
+    }
+
+    template<class K, u64 N, u64 M>
+    Matrix<K, N, M> operator+(const Matrix<K, N, M>& left, const Matrix<K, N, M>& right)
+    {
+        Matrix<K, N, M> res(left);
+        res.Add(right);
+        return res;
+    }
+
+    template<class K, u64 N, u64 M>
+    Matrix<K, N, M> operator-(const Matrix<K, N, M>& left, const Matrix<K, N, M>& right)
+    {
+        Matrix<K, N, M> res(left);
+        res.Sub(right);
+        return res;
+    }
+
+    template<class K, u64 N, u64 M>
+    Matrix<K, N, M> operator*(const Matrix<K, N, M>& left, const K& scalar)
+    {
+        Matrix<K, N, M> res(left);
+        res.Scl(scalar);
+        return res;
+    }
+
+    template<class K, u64 N, u64 M>
+    Matrix<K, N, M> operator*(const K& scalar, const Matrix<K, N, M>& right)
+    {
+        Matrix<K, N, M> res(right);
+        res.Scl(scalar);
+        return res;
     }
 } // namespace tk3 | Impl ex00

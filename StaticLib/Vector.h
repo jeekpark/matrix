@@ -105,10 +105,7 @@ namespace tk3
     Vector<K, N> operator+(const Vector<K, N>& left, const Vector<K, N>& right)
     {
         Vector<K, N> res(left);
-        for (u64 i = 0; i < N; ++i)
-        {
-            res.data[i] += right.data[i];
-        }
+        res.Add(right);
         return res;
     }
 
@@ -116,10 +113,7 @@ namespace tk3
     Vector<K, N> operator-(const Vector<K, N>& left, const Vector<K, N>& right)
     {
         Vector<K, N> res(left);
-        for (u64 i = 0; i < N; ++i)
-        {
-            res.data[i] -= right.data[i];
-        }
+        res.Sub(right);
         return res;
     }
 
@@ -127,10 +121,7 @@ namespace tk3
     Vector<K, N> operator*(const Vector<K, N>& left, const K& scalar)
     {
         Vector<K, N> res(left);
-        for (u64 i = 0; i < N; ++i)
-        {
-            res.data[i] *= scalar;
-        }
+        res.Scl(scalar);
         return res;
     }
 
@@ -138,11 +129,7 @@ namespace tk3
     Vector<K, N> operator*(const K& scalar, const Vector<K, N>& right)
     {
         Vector<K, N> res(right);
-        for (u64 i = 0; i < N; ++i)
-        {
-            res.data[i] *= scalar;
-        }
+        res.Scl(scalar);
         return res;
     }
-
 } // namespace tk3 | Impl ex00

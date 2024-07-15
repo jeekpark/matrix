@@ -118,8 +118,8 @@ namespace tk3
 namespace tk3
 {
     template<class K, u64 N, u64 M>
-    Matrix<K, N, M> Matrix<K, N, M>::LinearInterpolation(const Matrix& u, const Matrix& v, f32 time)
+    Matrix<K, N, M> Matrix<K, N, M>::LinearInterpolation(const Matrix& a, const Matrix& b, f32 time)
     {
-        return u + (v - u) * time;
+        return a + (b - a) * time;
     }
-} // namespace tk3 | Impl ex01
+} // namespace tk3 | Impl ex02

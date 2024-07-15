@@ -28,6 +28,10 @@ namespace tk3
 
         // API ex02
         static Vector LinearInterpolation(const Vector&, const Vector&, f32);
+
+        // API ex03
+        K Dot(const Vector&) const;
+        static K DotProduct(const Vector&, const Vector&);
     };
 
     // API ex00
@@ -147,4 +151,25 @@ namespace tk3
     {
         return u + (v - u) * time;
     }
-} // namespace tk3 | Impl ex01
+} // namespace tk3 | Impl ex02
+
+// Impl ex03
+namespace tk3
+{
+    template<class K, u64 N>
+    K Vector<K, N>::Dot(const Vector& rhs) const
+    {
+        K res = K();
+        for (u64 i = 0; i < N; ++i)
+        {
+            res = res + (data[i] * rhs.data[i]);
+        }
+        return res;
+    }
+
+    template<class K, u64 N>
+    K  Vector<K, N>::DotProduct(const Vector& u, const Vector& v)
+    {
+        return u.Dot(v);
+    }
+} // namespace tk3 | Impl ex03

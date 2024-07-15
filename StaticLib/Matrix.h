@@ -2,7 +2,7 @@
 
 #include "types.h"
 
-// Public API
+// Decl
 namespace tk3
 {
     template <class K, u64 N, u64 M>
@@ -33,7 +33,7 @@ namespace tk3
     template <class K, u64 N, u64 M>
     Matrix<K, N, M> operator*(const K&, const Matrix<K, N, M>&);
 
-} // namespace tk3 | Public API
+} // namespace tk3 | Decl
 
 // Impl general
 namespace tk3

@@ -6,7 +6,7 @@
 
 #include "types.h"
 
-// Public API
+// Decl
 namespace tk3
 {
     template <class K, u64 N>
@@ -30,7 +30,6 @@ namespace tk3
         static Vector LinearInterpolation(const Vector&, const Vector&, f32);
 
         // API ex03
-        K Dot(const Vector&) const;
         static K DotProduct(const Vector&, const Vector&);
     };
 
@@ -45,7 +44,7 @@ namespace tk3
     Vector<K, N> operator*(const K&, const Vector<K, N>&);
 
     
-} // namespace tk3 | Public API
+} // namespace tk3 | Decl
 
 // Impl general
 namespace tk3
@@ -157,19 +156,13 @@ namespace tk3
 namespace tk3
 {
     template<class K, u64 N>
-    K Vector<K, N>::Dot(const Vector& rhs) const
+    K  Vector<K, N>::DotProduct(const Vector& u, const Vector& v)
     {
         K res = K();
         for (u64 i = 0; i < N; ++i)
         {
-            res = res + (data[i] * rhs.data[i]);
+            res = res + (u.data[i] * v.data[i]);
         }
         return res;
-    }
-
-    template<class K, u64 N>
-    K  Vector<K, N>::DotProduct(const Vector& u, const Vector& v)
-    {
-        return u.Dot(v);
     }
 } // namespace tk3 | Impl ex03

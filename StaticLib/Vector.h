@@ -25,6 +25,9 @@ namespace tk3
 
         // API ex01
         static Vector LinearCombination(const std::vector<Vector>&, const std::vector<K>&);
+
+        // API ex02
+        static Vector LinearInterpolation(const Vector&, const Vector&, f32);
     };
 
     // API ex00
@@ -133,5 +136,15 @@ namespace tk3
             res.Add(vectors[i] * scalars[i]);
         }
         return res;
+    }
+} // namespace tk3 | Impl ex01
+
+// Impl ex02
+namespace tk3
+{
+    template<class K, u64 N>
+    Vector<K, N> Vector<K, N>::LinearInterpolation(const Vector& u, const Vector& v, f32 time)
+    {
+        return u + (v - u) * time;
     }
 } // namespace tk3 | Impl ex01

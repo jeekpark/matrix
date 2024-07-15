@@ -18,6 +18,9 @@ namespace tk3
         void Add(const Matrix&);
         void Sub(const Matrix&);
         void Scl(const K&);
+
+        // API ex02
+        static Matrix LinearInterpolation(const Matrix&, const Matrix&, f32);
     };
 
     // API ex00
@@ -110,3 +113,13 @@ namespace tk3
         return res;
     }
 } // namespace tk3 | Impl ex00
+
+// Impl ex02
+namespace tk3
+{
+    template<class K, u64 N, u64 M>
+    Matrix<K, N, M> Matrix<K, N, M>::LinearInterpolation(const Matrix& u, const Matrix& v, f32 time)
+    {
+        return u + (v - u) * time;
+    }
+} // namespace tk3 | Impl ex01

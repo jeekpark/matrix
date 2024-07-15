@@ -1,9 +1,8 @@
 #pragma once
 
-#include <initializer_list>
-#include <iostream>
-#include <iomanip>
+#include <cassert>
 #include <cstring>
+#include <vector>
 
 #include "types.h"
 
@@ -16,13 +15,16 @@ namespace tk3
         K data[N];
 
         // API general
-        K& operator()(u64);
-        const K& operator()(u64) const;
+        K& operator[](u64);
+        const K& operator[](u64) const;
 
         // API ex00
         void Add(const Vector&);
         void Sub(const Vector&);
         void Scl(const K&);
+
+        // API ex01
+        static Vector LinearCombination(const std::vector<Vector>&, const std::vector<K>&);
     };
 
     // API ex00
@@ -35,19 +37,20 @@ namespace tk3
     template <class K, u64 N>
     Vector<K, N> operator*(const K&, const Vector<K, N>&);
 
+    
 } // namespace tk3 | Public API
 
 // Impl general
 namespace tk3
 {
     template <class K, u64 N>
-    K& Vector<K, N>::operator()(u64 index)
+    K& Vector<K, N>::operator[](u64 index)
     {
         return data[index];
     }
 
     template <class K, u64 N>
-    const K& Vector<K, N>::operator()(u64 index) const
+    const K& Vector<K, N>::operator[](u64 index) const
     {
         return data[index];
     }
@@ -115,3 +118,20 @@ namespace tk3
         return res;
     }
 } // namespace tk3 | Impl ex00
+
+// Impl ex01
+namespace tk3
+{
+    template<class K, u64 N>
+    Vector<K, N> Vector<K, N>::LinearCombination(const std::vector<Vector>& vectors, const std::vector<K>& scalars)
+    {
+        assert(vectors.size() == scalars.size());
+        Vector<K, N> res = {};
+
+        for (u64 i = 0; i < vectors.size(); ++i)
+        {
+            res.Add(vectors[i] * scalars[i]);
+        }
+        return res;
+    }
+} // namespace tk3 | Impl ex01

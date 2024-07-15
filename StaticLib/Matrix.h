@@ -11,8 +11,8 @@ namespace tk3
         K data[N * M];
 
         // API general
-        K& operator()(u64, u64);
-        const K& operator()(u64, u64) const;
+        K(&operator[](u64))[M];
+        const K(&operator[](u64) const)[M];
 
         // API ex00
         void Add(const Matrix&);
@@ -36,15 +36,15 @@ namespace tk3
 namespace tk3
 {
     template<class K, u64 N, u64 M>
-    K& Matrix<K, N, M>::operator()(u64 row, u64 col)
+    K(&Matrix<K, N, M>::operator[](u64 row))[M]
     {
-        return data[row * N + col];
+        return reinterpret_cast<K(&)[M]>(data[row]);
     }
 
     template<class K, u64 N, u64 M>
-    const K& Matrix<K, N, M>::operator()(u64 row, u64 col) const
+    const K(&Matrix<K, N, M>::operator[](u64 row) const)[M]
     {
-        return data[row * N + col];
+        return reinterpret_cast<const K(&)[M]>(data[row]);
     }
 } // namespace tk3 | Impl general
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <iomanip>
 
 #include "Matrix.h"
 #include "Vector.h"
@@ -17,7 +18,7 @@ namespace tk3
                 std::cout
                     << "["
                     << std::setw(5)
-                    << matrix(n, m)
+                    << matrix[n][m]
                     << "]";
             }
             std::cout << std::endl;
@@ -32,7 +33,7 @@ namespace tk3
             std::cout
                 << "["
                 << std::setw(5)
-                << vector(n)
+                << vector[n]
                 << "]";
 
         }

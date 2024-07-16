@@ -36,6 +36,9 @@ namespace tk3
         static f32 NormManhattan(const Vector&);
         static f32 NormEuclidean(const Vector&);
         static f32 NormSupremum(const Vector&);
+
+        // API ex05
+        static f32 CosineTheta(const Vector&, const Vector&);
     };
 
     // API general
@@ -227,3 +230,14 @@ namespace tk3
         return res;
     }
 } // namespace tk3 | Impl ex04
+
+// Impl ex05
+namespace tk3
+{
+    template<class K, u64 N>
+    f32 Vector<K, N>::CosineTheta(const Vector& lhs, const Vector& rhs)
+    {
+        return Vector<K, N>::DotProduct(lhs, rhs) /
+            (Vector<K, N>::NormEuclidean(lhs) * Vector<K, N>::NormEuclidean(rhs));
+    }
+} // namespace tk3 | Impl ex05

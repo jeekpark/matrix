@@ -22,6 +22,10 @@ namespace tk3
         // API ex02
         static Matrix LinearInterpolation(const Matrix&, const Matrix&, f32);
     };
+    
+    // API general
+    template<class K, u64 N, u64 M>
+    void printLayout(const Matrix<K, N, M>& matrix);
 
     // API ex00
     template <class K, u64 N, u64 M>
@@ -48,6 +52,23 @@ namespace tk3
     const K(&Matrix<K, N, M>::operator[](u64 row) const)[M]
     {
         return reinterpret_cast<const K(&)[M]>(data[row]);
+    }
+
+    template<class K, u64 N, u64 M>
+    void printLayout(const Matrix<K, N, M>& matrix)
+    {
+        for (u64 n = 0; n < N; ++n)
+        {
+            for (u64 m = 0; m < M; ++m)
+            {
+                std::cout
+                    << "["
+                    << std::setw(5)
+                    << matrix[n][m]
+                    << "]";
+            }
+            std::cout << std::endl;
+        }
     }
 } // namespace tk3 | Impl general
 

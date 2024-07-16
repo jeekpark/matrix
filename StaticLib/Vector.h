@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "types.h"
-
+#include "utils.h"
 // Decl
 namespace tk3
 {
@@ -38,6 +38,10 @@ namespace tk3
         static f32 NormSupremum(const Vector&);
     };
 
+    // API general
+    template<class K, u64 N>
+    void printLayout(const Vector<K, N>&);
+
     // API ex00
     template <class K, u64 N>
     Vector<K, N> operator+(const Vector<K, N>&, const Vector<K, N>&);
@@ -64,6 +68,21 @@ namespace tk3
     const K& Vector<K, N>::operator[](u64 index) const
     {
         return data[index];
+    }
+
+    template<class K, u64 N>
+    void printLayout(const Vector<K, N>& vector)
+    {
+        for (u64 n = 0; n < N; ++n)
+        {
+            std::cout
+                << "["
+                << std::setw(5)
+                << vector[n]
+                << "]";
+
+        }
+        std::cout << std::endl;
     }
 } // namespace tk3 | Impl general
 
@@ -203,7 +222,7 @@ namespace tk3
         f32 res = f32();
         for (int i = 0; i < N; ++i)
         {
-            res = (tk3::abs(vector[i]) > res) ? tk3::abs(vector[i]) : res);
+            res = (tk3::abs(vector[i]) > res) ? tk3::abs(vector[i]) : res;
         }
         return res;
     }

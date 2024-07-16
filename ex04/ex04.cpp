@@ -1,12 +1,27 @@
 #include "Vector.h"
-#include "utils.h"
-
 
 int main()
 {
-    tk3::Vector<float, 3> A = { 1.f,2.f,3.f };
-    printLayout(A); // 작동
-    printLayout<float, 3>(A); // 오류
+    tk3::Vector<float, 3> A = {};
 
+    A = { 1.f, 2.f, 3.f };
 
+    std::cout << "벡터의 노름(L1 맨하탄)\n\n"
+        << "A = { 1.f, 2.f, 3.f }\n"
+        << "예상: 6\n"
+        << "결괴: " << tk3::Vector<float, 3>::NormManhattan(A)
+        << "\n\n\n";
+
+    std::cout << "벡터의 노름(L2 유클라디안)\n\n"
+        << "A = { 1.f, 2.f, 3.f }\n"
+        << "예상: 3.74165738\n"
+        << "결괴: " << tk3::Vector<float, 3>::NormEuclidean(A)
+        << "\n\n\n";
+
+    std::cout << "벡터의 노름(L_inf 최대)\n\n"
+        << "A = { 1.f, 2.f, 3.f }\n"
+        << "예상: 3\n"
+        << "결괴: " << tk3::Vector<float, 3>::NormSupremum(A)
+        << "\n\n\n";
+    return 0;
 }

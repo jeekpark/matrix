@@ -31,6 +31,11 @@ namespace tk3
 
         // API ex03
         static K DotProduct(const Vector&, const Vector&);
+
+        // API ex04
+        static f32 NormManhattan(const Vector&);
+        static f32 NormEuclidean(const Vector&);
+        static f32 NormSupremum(const Vector&);
     };
 
     // API ex00
@@ -166,3 +171,40 @@ namespace tk3
         return res;
     }
 } // namespace tk3 | Impl ex03
+
+// Impl ex04
+namespace tk3
+{
+    template<class K, u64 N>
+    f32 Vector<K, N>::NormManhattan(const Vector& vector)
+    {
+        f32 res = f32();
+        for (int i = 0; i < N; ++i)
+        {
+            res = res + (vector[i] < 0 ? -vector[i] : vector[i]);
+        }
+        return res;
+    }
+
+    template<class K, u64 N>
+    f32 Vector<K, N>::NormEuclidean(const Vector& vector)
+    {
+        f32 res = f32();
+        for (int i = 0; i < N; ++i)
+        {
+            res = res + (vector[i] * vector[i]);
+        }
+        return tk3::sqrtf(res);
+    }
+
+    template<class K, u64 N>
+    f32 Vector<K, N>::NormSupremum(const Vector& vector)
+    {
+        f32 res = f32();
+        for (int i = 0; i < N; ++i)
+        {
+            res = (tk3::abs(vector[i]) > res) ? tk3::abs(vector[i]) : res);
+        }
+        return res;
+    }
+} // namespace tk3 | Impl ex04

@@ -39,6 +39,9 @@ namespace tk3
 
         // API ex05
         static f32 CosineTheta(const Vector&, const Vector&);
+
+        // API ex06
+        static Vector<K, 3> CrossProduct(const Vector<K, 3>&, const Vector<K, 3>&);
     };
 
     // API general
@@ -241,3 +244,17 @@ namespace tk3
             (Vector<K, N>::NormEuclidean(lhs) * Vector<K, N>::NormEuclidean(rhs));
     }
 } // namespace tk3 | Impl ex05
+
+// Impl ex06
+namespace tk3
+{
+    template<class K, u64 N>
+    Vector<K, 3> Vector<K, N>::CrossProduct(const Vector<K, 3>& lhs, const Vector<K, 3>& rhs)
+    {
+        return {
+            lhs[1] * rhs[2] - lhs[2] * rhs[1],
+            lhs[2] * rhs[0] - lhs[0] * rhs[2],
+            lhs[0] * rhs[1] - lhs[1] * rhs[0],
+        };
+    }
+} // namespace tk3 | Impl ex06

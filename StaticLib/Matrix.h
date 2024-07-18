@@ -1,5 +1,8 @@
 #pragma once
 
+#include <iostream>
+#include <iomanip>
+
 #include "types.h"
 
 // Decl
@@ -8,7 +11,7 @@ namespace tk3
     template <class K, u64 N, u64 M>
     struct Matrix
     {
-        K data[N * M];
+        K data[N][M];
 
         // API general
         K(&operator[](u64))[M];
@@ -21,6 +24,10 @@ namespace tk3
 
         // API ex02
         static Matrix LinearInterpolation(const Matrix&, const Matrix&, f32);
+
+        // API ex07
+        template<u64 P>
+        static Matrix<K, N, P> Multiplication(const Matrix<K, N, M>&, const Matrix<K, M, P>&);
     };
     
     // API general
@@ -144,3 +151,26 @@ namespace tk3
         return a + (b - a) * time;
     }
 } // namespace tk3 | Impl ex02
+
+// Impl ex07
+namespace tk3
+{
+    template<class K, u64 N, u64 M>
+    template<u64 P>
+    Matrix<K, N, P> Matrix<K, N, M>::Multiplication(const Matrix<K, N, M>& a, const Matrix<K, M, P>& b)
+    {
+        Matrix<K, N, P> res;
+        for (u64 i = 0; i < N; ++i)
+        {
+            for (u64 j = 0; j < P; ++j)
+            {
+                res[i][j] = K();
+                for (u64 k = 0; k < M; ++k)
+                {
+                    res[i][j] += a[i][k] * b[k][j];
+                }
+            }
+        }
+        return res;
+    }
+}

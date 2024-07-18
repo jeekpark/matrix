@@ -3,6 +3,8 @@
 #include <cassert>
 #include <cstring>
 #include <vector>
+#include <iostream>
+#include <iomanip>
 
 #include "types.h"
 #include "utils.h"
